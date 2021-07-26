@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <div>
+        <span>제목 : 사이트가 안들어가져요</span>
+        <p>내용 : 사이트가 안들어가집니다..</p>
+    </div>
+
+    <div>
+        <button>접수</button>
+    </div>
+    <span>할당하기</span>
+    <form action="/qna" method="post">
+        <input type="text" name="name" placeholder="할당할 직원 이름을 입력">
+        <input type="submit" value="할당">
+    </form>
+  </body>
+</html>
