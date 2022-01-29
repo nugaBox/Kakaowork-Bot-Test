@@ -6,7 +6,26 @@ const { APPKEY, URL, memberDB } = require('../config')
 const sendMsg = async(conv_id, contents) => {
     let data = {
         "conversation_id" : conv_id,
-        "text" : contents
+        "text" : "퇴근 시간! 오늘도 고생하셨습니다",
+        
+        "blocks": [
+            {
+                "type": "image_link",
+                "url": "https://siiru.comin.com/images/siiru_meta.png"
+            },
+            {
+                "type": "text",
+                "text": "오늘의 퇴근송은 '"+contents.info+"'입니다. 오늘도 수고하셨어요😄",
+                "markdown": false
+            },
+            {
+                "type": "button",
+                "text": "오늘의 퇴근송 듣기",
+                "style": "default",
+                "action_type": "open_system_browser",
+                "value": contents.link
+            }
+        ]
     }
     axios.post(URL, JSON.stringify(data), {
         headers: {
@@ -33,8 +52,11 @@ router.post('/', async function(req, res, next) {
     console.log('qna post')
     let url = req.headers.referer
     let name = body.name
+    let info = body.info
+    let link = body.link
+    let contents = {"info" : info, "link" : link}
     let conv_id = memberDB[name]
-    await sendMsg(conv_id, url)
+    await sendMsg(conv_id, contents)
     res.redirect('/')
 })
 
